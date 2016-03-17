@@ -31,8 +31,13 @@ public class MainActivity extends AppCompatActivity implements
     private Button mBtnShadowColor;
     private Button mBtnTextColor;
 
+    private View mWrapperShadow;
+    private View mWrapperAnimation;
+
     private int[] mStartColors = new int[MODEL_COUNT];
     private int[] mEndColors = new int[MODEL_COUNT];
+
+    private int mFullSize = -1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,6 +64,9 @@ public class MainActivity extends AppCompatActivity implements
         models.add(new ArcProgressStackView.Model("Stack", 0, Color.parseColor(bgColors[2]), mStartColors[2]));
         models.add(new ArcProgressStackView.Model("View", 0, Color.parseColor(bgColors[3]), mStartColors[3]));
         mArcProgressStackView.setModels(models);
+
+        mWrapperShadow = findViewById(R.id.wrapper_shadow);
+        mWrapperAnimation = findViewById(R.id.wrapper_animation);
 
         final CheckBox cbAnimating = (CheckBox) findViewById(R.id.cb_animating);
         final CheckBox cbDragging = (CheckBox) findViewById(R.id.cb_dragging);
@@ -103,6 +111,7 @@ public class MainActivity extends AppCompatActivity implements
         handleSelectedColor(true, Color.DKGRAY);
         handleSelectedColor(false, Color.WHITE);
 
+        final SeekBar sbViewSize = (SeekBar) findViewById(R.id.pb_view_size);
         final SeekBar sbShadowDistance = (SeekBar) findViewById(R.id.pb_shadow_distance);
         final SeekBar sbShadowAngle = (SeekBar) findViewById(R.id.pb_shadow_angle);
         final SeekBar sbShadowRadius = (SeekBar) findViewById(R.id.pb_shadow_radius);
@@ -112,6 +121,7 @@ public class MainActivity extends AppCompatActivity implements
         final SeekBar sbStartAngle = (SeekBar) findViewById(R.id.pb_start_angle);
         final SeekBar sbSweepAngle = (SeekBar) findViewById(R.id.pb_sweep_angle);
 
+        sbViewSize.setOnSeekBarChangeListener(this);
         sbShadowDistance.setOnSeekBarChangeListener(this);
         sbShadowAngle.setOnSeekBarChangeListener(this);
         sbShadowRadius.setOnSeekBarChangeListener(this);
@@ -142,6 +152,7 @@ public class MainActivity extends AppCompatActivity implements
 
             }
         });
+
         mArcProgressStackView.postDelayed(new Runnable() {
             @Override
             public void run() {
@@ -155,12 +166,14 @@ public class MainActivity extends AppCompatActivity implements
         switch (buttonView.getId()) {
             case R.id.cb_animating:
                 mArcProgressStackView.setIsAnimated(isChecked);
+                mWrapperAnimation.setVisibility(isChecked ? View.VISIBLE : View.GONE);
                 break;
             case R.id.cb_dragging:
                 mArcProgressStackView.setIsDragged(isChecked);
                 break;
             case R.id.cb_shadowing:
                 mArcProgressStackView.setIsShadowed(isChecked);
+                mWrapperShadow.setVisibility(isChecked ? View.VISIBLE : View.GONE);
                 break;
             case R.id.cb_rounding:
                 mArcProgressStackView.setIsRounded(isChecked);
@@ -214,8 +227,15 @@ public class MainActivity extends AppCompatActivity implements
     }
 
     @Override
-    public void onProgressChanged(final SeekBar seekBar, int progress, final boolean fromUser) {
+    public void onProgressChanged(final SeekBar seekBar, final int progress, final boolean fromUser) {
         switch (seekBar.getId()) {
+            case R.id.pb_view_size:
+                if (mFullSize == -1)
+                    mFullSize = mArcProgressStackView.getSize();
+                mArcProgressStackView.getLayoutParams().height = (int) ((mFullSize * 0.5f) +
+                                (int) ((float) mFullSize * 0.5f * ((float) progress / 100.0f)));
+                mArcProgressStackView.requestLayout();
+                break;
             case R.id.pb_shadow_distance:
                 mArcProgressStackView.setShadowDistance(progress);
                 break;
@@ -232,8 +252,7 @@ public class MainActivity extends AppCompatActivity implements
                 mArcProgressStackView.setDrawWidthFraction((float) progress / 100.0f);
                 break;
             case R.id.pb_model_offset:
-                progress = progress - 50;
-                mArcProgressStackView.setProgressModelOffset(progress);
+                mArcProgressStackView.setProgressModelOffset(progress - 50);
                 break;
             case R.id.pb_start_angle:
                 mArcProgressStackView.setStartAngle(progress);

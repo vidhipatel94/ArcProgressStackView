@@ -564,7 +564,10 @@ public class ArcProgressStackView extends View {
         if (mIsShadowed)
             mProgressPaint.setShadowLayer(mShadowRadius, newDx, newDy, mShadowColor);
         else mProgressPaint.clearShadowLayer();
-        setLayerType(LAYER_TYPE_SOFTWARE, mIsShadowed ? mProgressPaint : null);
+        setLayerType(
+                mIsShadowed ? LAYER_TYPE_SOFTWARE : LAYER_TYPE_HARDWARE,
+                mIsShadowed ? mProgressPaint : null
+        );
         postInvalidate();
     }
 
@@ -579,7 +582,10 @@ public class ArcProgressStackView extends View {
                     shadowOffset, 0.0f, -shadowOffset, adjustColorAlpha(mShadowColor, 0.5f)
             );
         } else mProgressPaint.clearShadowLayer();
-        setLayerType(LAYER_TYPE_SOFTWARE, mIsShadowed ? mProgressPaint : null);
+        setLayerType(
+                mIsShadowed ? LAYER_TYPE_SOFTWARE : LAYER_TYPE_HARDWARE,
+                mIsShadowed ? mProgressPaint : null
+        );
         postInvalidate();
     }
 
@@ -836,8 +842,6 @@ public class ArcProgressStackView extends View {
             // Check if gradient for draw shadow at first and then gradient progress
             if (isGradient) {
                 if (!mIsModelBgEnabled) {
-//                    resetShadowLayer();
-//                    mProgressPaint.setAlpha(0);
                     canvas.drawPath(model.mPath, mProgressPaint);
 
                     if (!isInEditMode())
@@ -972,51 +976,6 @@ public class ArcProgressStackView extends View {
         // Restore after drawing
         canvas.restore();
     }
-
-//    @Override
-//    protected Parcelable onSaveInstanceState() {
-//        Parcelable superState = super.onSaveInstanceState();
-//
-//        Bundle state = new Bundle();
-//        state.putParcelable("PARENT", superState);
-//        state.putInt("MAX", mMax);
-//        state.putInt("PROGRESS", mProgress);
-//        state.putInt("mCircleColor", mCircleColor);
-//        state.putInt("mCircleProgressColor", mCircleProgressColor);
-//        state.putInt("mPointerColor", mPointerColor);
-//        state.putInt("mPointerHaloColor", mPointerHaloColor);
-//        state.putInt("mPointerHaloColorOnTouch", mPointerHaloColorOnTouch);
-//        state.putInt("mPointerAlpha", mPointerAlpha);
-//        state.putInt("mPointerAlphaOnTouch", mPointerAlphaOnTouch);
-//        state.putBoolean("lockEnabled", lockEnabled);
-//        state.putBoolean("isTouchEnabled", isTouchEnabled);
-//
-//        return state;
-//    }
-//
-//    @Override
-//    protected void onRestoreInstanceState(Parcelable state) {
-//        Bundle savedState = (Bundle) state;
-//
-//        Parcelable superState = savedState.getParcelable("PARENT");
-//        super.onRestoreInstanceState(superState);
-//
-//        mMax = savedState.getInt("MAX");
-//        mProgress = savedState.getInt("PROGRESS");
-//        mCircleColor = savedState.getInt("mCircleColor");
-//        mCircleProgressColor = savedState.getInt("mCircleProgressColor");
-//        mPointerColor = savedState.getInt("mPointerColor");
-//        mPointerHaloColor = savedState.getInt("mPointerHaloColor");
-//        mPointerHaloColorOnTouch = savedState.getInt("mPointerHaloColorOnTouch");
-//        mPointerAlpha = savedState.getInt("mPointerAlpha");
-//        mPointerAlphaOnTouch = savedState.getInt("mPointerAlphaOnTouch");
-//        lockEnabled = savedState.getBoolean("lockEnabled");
-//        isTouchEnabled = savedState.getBoolean("isTouchEnabled");
-//
-//        initPaints();
-//
-//        recalculateAll();
-//    }
 
     public static class Model {
 

@@ -7,23 +7,26 @@
     android:background="#fff"
     android:divider="@drawable/divider"
     android:orientation="vertical"
-    android:showDividers="middle"
-    android:weightSum="2">
+    android:showDividers="middle">
 
-    <com.gigamole.library.ArcProgressStackView
-        android:id="@+id/apsv"
+    <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_gravity="center"
-        android:layout_weight="1"
-        android:layout_margin="10dp"
-        app:apsv_preview_colors="@array/polluted_waves"
-        app:apsv_model_bg_enabled="true"/>
+        android:layout_height="wrap_content"
+        android:padding="15dp">
+
+        <com.gigamole.library.ArcProgressStackView
+            android:id="@+id/apsv"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            app:apsv_preview_colors="@array/polluted_waves"
+            app:apsv_model_bg_enabled="true"/>
+
+    </FrameLayout>
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1">
+        android:layout_height="match_parent">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -32,6 +35,23 @@
             android:gravity="top"
             android:orientation="vertical"
             android:showDividers="middle">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <TextView
+                    style="@style/PreviewStyle"
+                    android:text="View Size"/>
+
+                <SeekBar
+                    android:id="@+id/pb_view_size"
+                    style="@style/PreviewStyle"
+                    android:max="100"
+                    android:progress="100"/>
+
+            </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -99,6 +119,7 @@
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/wrapper_shadow"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
@@ -142,6 +163,7 @@
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/wrapper_animation"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
