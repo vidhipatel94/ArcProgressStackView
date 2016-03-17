@@ -475,7 +475,7 @@ public class ArcProgressStackView extends View {
     public void setShadowDistance(final float shadowDistance) {
         mShadowDistance = shadowDistance;
         resetShadowLayer();
-        postInvalidate();
+        requestLayout();
     }
 
     public float getShadowAngle() {
@@ -486,7 +486,7 @@ public class ArcProgressStackView extends View {
     public void setShadowAngle(@FloatRange(from = MIN_ANGLE, to = MAX_ANGLE) final float shadowAngle) {
         mShadowAngle = Math.max(MIN_ANGLE, Math.min(shadowAngle, MAX_ANGLE));
         resetShadowLayer();
-        postInvalidate();
+        requestLayout();
     }
 
     public float getShadowRadius() {
@@ -496,7 +496,7 @@ public class ArcProgressStackView extends View {
     public void setShadowRadius(final float shadowRadius) {
         mShadowRadius = shadowRadius > MIN_SHADOW ? shadowRadius : MIN_SHADOW;
         resetShadowLayer();
-        postInvalidate();
+        requestLayout();
     }
 
     public int getShadowColor() {
