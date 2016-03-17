@@ -26,17 +26,22 @@ public class MainActivity extends AppCompatActivity implements
 
     public final static int MODEL_COUNT = 4;
 
+    // APSV
     private ArcProgressStackView mArcProgressStackView;
 
+    // Buttons
     private Button mBtnShadowColor;
     private Button mBtnTextColor;
 
+    // Wrappers
     private View mWrapperShadow;
     private View mWrapperAnimation;
 
+    // Parsed colors
     private int[] mStartColors = new int[MODEL_COUNT];
     private int[] mEndColors = new int[MODEL_COUNT];
 
+    // First full size of APSV
     private int mFullSize = -1;
 
     @Override
@@ -47,17 +52,21 @@ public class MainActivity extends AppCompatActivity implements
     }
 
     private void init() {
+        // Get APSV
         mArcProgressStackView = (ArcProgressStackView) findViewById(R.id.apsv);
 
+        // Get colors
         final String[] startColors = getResources().getStringArray(R.array.polluted_waves);
         final String[] endColors = getResources().getStringArray(R.array.default_preview);
         final String[] bgColors = getResources().getStringArray(R.array.medical_express);
 
+        // Parse colors
         for (int i = 0; i < MODEL_COUNT; i++) {
             mStartColors[i] = Color.parseColor(startColors[i]);
             mEndColors[i] = Color.parseColor(endColors[i]);
         }
 
+        // Set models
         final ArrayList<ArcProgressStackView.Model> models = new ArrayList<>();
         models.add(new ArcProgressStackView.Model("Circle", 0, Color.parseColor(bgColors[0]), mStartColors[0]));
         models.add(new ArcProgressStackView.Model("Progress", 0, Color.parseColor(bgColors[1]), mStartColors[1]));
@@ -65,9 +74,11 @@ public class MainActivity extends AppCompatActivity implements
         models.add(new ArcProgressStackView.Model("View", 0, Color.parseColor(bgColors[3]), mStartColors[3]));
         mArcProgressStackView.setModels(models);
 
+        // Get wrappers
         mWrapperShadow = findViewById(R.id.wrapper_shadow);
         mWrapperAnimation = findViewById(R.id.wrapper_animation);
 
+        // Get checkboxes
         final CheckBox cbAnimating = (CheckBox) findViewById(R.id.cb_animating);
         final CheckBox cbDragging = (CheckBox) findViewById(R.id.cb_dragging);
         final CheckBox cbShadowing = (CheckBox) findViewById(R.id.cb_shadowing);
@@ -78,6 +89,7 @@ public class MainActivity extends AppCompatActivity implements
         final CheckBox cbUseVerticalOrientation = (CheckBox) findViewById(R.id.cb_use_vertical_orientation);
         final CheckBox cbUseGradient = (CheckBox) findViewById(R.id.cb_use_gradient);
 
+        // Set checkboxes
         cbAnimating.setOnCheckedChangeListener(this);
         cbDragging.setOnCheckedChangeListener(this);
         cbShadowing.setOnCheckedChangeListener(this);
@@ -98,19 +110,23 @@ public class MainActivity extends AppCompatActivity implements
         onCheckedChanged(cbUseVerticalOrientation, cbUseVerticalOrientation.isChecked());
         onCheckedChanged(cbUseGradient, cbUseGradient.isChecked());
 
+        // Get buttons
         mBtnTextColor = (Button) findViewById(R.id.btn_text_color);
         mBtnShadowColor = (Button) findViewById(R.id.btn_shadow_color);
         final Button btnAnimate = (Button) findViewById(R.id.btn_animate);
         final Button btnReset = (Button) findViewById(R.id.btn_reset);
 
+        // Set buttons
         mBtnTextColor.setOnClickListener(this);
         mBtnShadowColor.setOnClickListener(this);
         btnAnimate.setOnClickListener(this);
         btnReset.setOnClickListener(this);
 
+        // Set default colors
         handleSelectedColor(true, Color.DKGRAY);
         handleSelectedColor(false, Color.WHITE);
 
+        // Get seekers
         final SeekBar sbViewSize = (SeekBar) findViewById(R.id.pb_view_size);
         final SeekBar sbShadowDistance = (SeekBar) findViewById(R.id.pb_shadow_distance);
         final SeekBar sbShadowAngle = (SeekBar) findViewById(R.id.pb_shadow_angle);
@@ -121,6 +137,7 @@ public class MainActivity extends AppCompatActivity implements
         final SeekBar sbStartAngle = (SeekBar) findViewById(R.id.pb_start_angle);
         final SeekBar sbSweepAngle = (SeekBar) findViewById(R.id.pb_sweep_angle);
 
+        // Set seekers
         sbViewSize.setOnSeekBarChangeListener(this);
         sbShadowDistance.setOnSeekBarChangeListener(this);
         sbShadowAngle.setOnSeekBarChangeListener(this);
@@ -131,6 +148,7 @@ public class MainActivity extends AppCompatActivity implements
         sbStartAngle.setOnSeekBarChangeListener(this);
         sbSweepAngle.setOnSeekBarChangeListener(this);
 
+        // Set animator listener
         mArcProgressStackView.setAnimatorListener(new Animator.AnimatorListener() {
             @Override
             public void onAnimationStart(final Animator animation) {
@@ -153,6 +171,7 @@ public class MainActivity extends AppCompatActivity implements
             }
         });
 
+        // Start apsv animation on start
         mArcProgressStackView.postDelayed(new Runnable() {
             @Override
             public void run() {
