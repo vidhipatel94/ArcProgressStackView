@@ -45,47 +45,139 @@ ArcProgressStackView requires a minimum sdk version of 8, but if you want animat
 Sample
 ========
 
-You can set such parameters as:
-
- - colors:
+For APSV you can set such parameters as:
  
-    allows you to create shadow with transparent etc.
- - angle:
+ - models:
+    
+    allows you to set APSV models, where you set title, progress and colors. Can be set up only via code.
+
+ - animation:
+    
+    allows you to animate progress with func call or with touch event.
  
-    allows you to set the angle of tint.
+ - shadow:
+ 
+    allows you to add shadow to your progress models, but remember, the shadow need LAYER_TYPE_SOFTWARE, so it decrease FPS.
+   
+ - round corners:
+ 
+    allows you to set round corners to models.
+    
+ - drag/seek:
+    
+    allows you to make your progress model seek like.
 
-ArcProgressStackView must have child. Only one child.
+ - typeface:
+    
+    allows you to set custom typeface.
+ 
+ - text color:
+ 
+    allows you to set text(title and progress indicator) color.
+ 
+ - shadow distance:
+ 
+    allows you to set shadow distance.
+    
+ - shadow angle:
+ 
+    allows you to set shadow angle.
+ 
+ - shadow radius:
+  
+     allows you to set shadow radius.
+     
+ - shadow color:
+  
+     allows you to set shadow color.
 
-The angle can only be positive and be in range from 0 to 360.
+ - animation duration:
+  
+     allows you to set animation duration.
+     
+ - animation listener:
+  
+     allows you to set animation listener.
+     
+ - interpolator:
+  
+     allows you to set interpolator to animation.
+     
+ - draw width:
+  
+     allows you to set draw width in fraction mode(e.g. 55%) or dimension mode.
+     
+ - model offset:
+  
+     allows you to set model offset(positive or negative).
+     
+ - model background:
+  
+     allows you to set model background track from start angle to sweep angle.
+     
+ - start angle:
+  
+     allows you to set start angle of models.
+ 
+ - sweep angle:
+  
+     allows you to set sweep angle of models.
+     
+ - progress indicator orientation:
+  
+     allows you to set progress indicator orientation.
+        
+ - preview colors:
+  
+     allows you to set preview colors, which generate count of models equals to count of colors.
+ 
+ - preview background:
+    
+    allows you to set models background preview color.
+
+All angle variables can only be positive and be in range from 0 to 360 degrees.
+
+The size of view automatically set up in square mode.
 
 Check out in code init:
 
-    final ArcProgressStackView tintLayout = (ArcProgressStackView) findViewById(R.id.tint_layout);
-    tintLayout.setAngle(145);
+            final ArrayList<ArcProgressStackView.Model> models = new ArrayList<>();
+            models.add(new ArcProgressStackView.Model("Circle", 25, bgColors[0], mStartColors[0]));
+            models.add(new ArcProgressStackView.Model("Progress", 50, bgColors[1], mStartColors[1]));
+            models.add(new ArcProgressStackView.Model("Stack", 75, bgColors[2], mStartColors[2]));
+            models.add(new ArcProgressStackView.Model("View", 100, bgColors[3], mStartColors[3]));
+            
+            final ArcProgressStackView arcProgressStackView = (ArcProgressStackView) findViewById(R.id.apsv);
+            arcProgressStackView.setModels(models);
+            
+Other methods check out in sample.
 
 And XML init:
 
-    <com.gigamole.tintlayout.lib.ArcProgressStackView
-        android:id="@+id/tint_layout"
-        android:layout_width="300dp"
-        android:layout_height="300dp"
-        android:layout_gravity="center"
-        android:background="@drawable/circle"
-        libs:colors="@array/tint_layout_colors">
-
-        <com.gigamole.tintlayout.AgencyTextView
+       <com.gigamole.samples.ArcProgressStackView
+            android:id="@+id/apsv"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:gravity="center"
-            android:text="@string/tint_layout_title"
-            android:textColor="@color/white"
-            android:textSize="50sp"
-            libs:agencyFont="agency_bold" />
-
-    </com.gigamole.tintlayout.lib.ArcProgressStackView>
-    
-If you want to look at circular tint animation just remove comment block in sample from XML and MainActivity.
+            android:layout_height="match_parent"
+            app:apsv_rounded="true"
+            app:apsv_shadowed="true"
+            app:apsv_animated="true"
+            app:apsv_dragged="true"
+            app:apsv_typeface="fonts/agency.ttf"
+            app:apsv_text_color="#fff"
+            app:apsv_shadow_distance="5dp"
+            app:apsv_shadow_angle="90"
+            app:apsv_shadow_radius="10dp"
+            app:apsv_shadow_color="#000"
+            app:apsv_animation_duration="1000"
+            app:apsv_interpolator="@android:anim/bounce_interpolator"
+            app:apsv_draw_width="75%"
+            app:apsv_model_offset="5dp"
+            app:apsv_model_bg_enabled="true"
+            app:apsv_start_angle="270"
+            app:apsv_sweep_angle="360"
+            app:apsv_indicator_orientation="vertical"
+            app:apsv_preview_colors="@array/default_preview"
+            app:apsv_preview_bg="#ccc"/>
 
 Getting Help
 ======
