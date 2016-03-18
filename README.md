@@ -11,7 +11,7 @@ U can check the sample app [here](https://github.com/GIGAMOLE/ArcProgressStackVi
 Download
 ------------
 
-You can download a .jar from GitHub's [releases page](https://github.com/GIGAMOLE/ArcProgressStackView/releases).
+You can download a .aar` from GitHub's [releases page](https://github.com/GIGAMOLE/ArcProgressStackView/releases).
 
 Or use Gradle jCenter:
 
