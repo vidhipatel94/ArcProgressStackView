@@ -1,3 +1,5 @@
+[![Android Arsenal](https://img.shields.io/badge/Android%20Arsenal-ArcProgressStackView-blue.svg?style=flat-square)](http://android-arsenal.com/details/1/3308)
+
 ArcProgressStackView
 ===================
 Present your progress bars in arc mode with information and total control.
