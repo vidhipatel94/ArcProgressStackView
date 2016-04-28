@@ -1,9 +1,11 @@
 package com.gigamole.arcprogressstackview;
 
 import android.animation.Animator;
+import android.animation.ValueAnimator;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.view.animation.OvershootInterpolator;
 import android.widget.Button;
@@ -149,6 +151,13 @@ public class MainActivity extends AppCompatActivity implements
         sbSweepAngle.setOnSeekBarChangeListener(this);
 
         // Set animator listener
+        mArcProgressStackView.setAnimatorUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
+            @Override
+            public void onAnimationUpdate(final ValueAnimator animation) {
+                // Update goes here
+                Log.d("onAnimationUpdate: ", String.valueOf(animation.getAnimatedValue()));
+            }
+        });
         mArcProgressStackView.setAnimatorListener(new Animator.AnimatorListener() {
             @Override
             public void onAnimationStart(final Animator animation) {

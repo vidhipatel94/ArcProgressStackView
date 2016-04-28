@@ -113,6 +113,7 @@ public class ArcProgressStackView extends View {
     // ValueAnimator and interpolator for progress animating
     private final ValueAnimator mProgressAnimator = new ValueAnimator();
     private ValueAnimator.AnimatorListener mAnimatorListener;
+    private ValueAnimator.AnimatorUpdateListener mAnimatorUpdateListener;
     private Interpolator mInterpolator;
     private int mAnimationDuration;
     private float mAnimatedFraction;
@@ -283,6 +284,9 @@ public class ArcProgressStackView extends View {
                     @Override
                     public void onAnimationUpdate(final ValueAnimator animation) {
                         mAnimatedFraction = (float) animation.getAnimatedValue();
+                        if (mAnimatorUpdateListener != null)
+                            mAnimatorUpdateListener.onAnimationUpdate(animation);
+
                         postInvalidate();
                     }
                 });
@@ -350,6 +354,14 @@ public class ArcProgressStackView extends View {
     public void setAnimatorListener(final ValueAnimator.AnimatorListener animatorListener) {
         mAnimatorListener = animatorListener;
         mProgressAnimator.addListener(mAnimatorListener);
+    }
+
+    public ValueAnimator.AnimatorUpdateListener getAnimatorUpdateListener() {
+        return mAnimatorUpdateListener;
+    }
+
+    public void setAnimatorUpdateListener(final ValueAnimator.AnimatorUpdateListener animatorUpdateListener) {
+        mAnimatorUpdateListener = animatorUpdateListener;
     }
 
     public float getStartAngle() {
