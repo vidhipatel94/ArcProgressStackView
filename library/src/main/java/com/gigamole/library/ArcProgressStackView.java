@@ -639,8 +639,10 @@ public class ArcProgressStackView extends View {
             mProgressAnimator.cancel();
         mProgressAnimator.setDuration(mAnimationDuration);
         mProgressAnimator.setInterpolator(mInterpolator);
-        mProgressAnimator.removeListener(mAnimatorListener);
-        mProgressAnimator.addListener(mAnimatorListener);
+        if (mAnimatorListener != null) {
+            mProgressAnimator.removeListener(mAnimatorListener);
+            mProgressAnimator.addListener(mAnimatorListener);
+        }
         mProgressAnimator.start();
     }
 
@@ -653,7 +655,7 @@ public class ArcProgressStackView extends View {
             mProgressAnimator.cancel();
         mProgressAnimator.setDuration(DEFAULT_ACTION_MOVE_ANIMATION_DURATION);
         mProgressAnimator.setInterpolator(null);
-        mProgressAnimator.removeListener(mAnimatorListener);
+        if (mAnimatorListener != null) mProgressAnimator.removeListener(mAnimatorListener);
         mProgressAnimator.start();
     }
 
