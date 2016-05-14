@@ -201,10 +201,12 @@ public class MainActivity extends AppCompatActivity implements
                 break;
             case R.id.cb_shadowing:
                 mArcProgressStackView.setIsShadowed(isChecked);
+                mArcProgressStackView.postInvalidate();
                 mWrapperShadow.setVisibility(isChecked ? View.VISIBLE : View.GONE);
                 break;
             case R.id.cb_rounding:
                 mArcProgressStackView.setIsRounded(isChecked);
+                mArcProgressStackView.postInvalidate();
                 break;
             case R.id.cb_show_model_bg:
                 mArcProgressStackView.setModelBgEnabled(isChecked);
@@ -228,6 +230,7 @@ public class MainActivity extends AppCompatActivity implements
                     model.setColors(isChecked ? new int[]{mStartColors[i], mEndColors[i]} : null);
                 }
                 mArcProgressStackView.requestLayout();
+                mArcProgressStackView.postInvalidate();
                 break;
         }
     }
@@ -266,12 +269,15 @@ public class MainActivity extends AppCompatActivity implements
                 break;
             case R.id.pb_shadow_distance:
                 mArcProgressStackView.setShadowDistance(progress);
+                mArcProgressStackView.postInvalidate();
                 break;
             case R.id.pb_shadow_angle:
                 mArcProgressStackView.setShadowAngle(progress);
+                mArcProgressStackView.postInvalidate();
                 break;
             case R.id.pb_shadow_radius:
                 mArcProgressStackView.setShadowRadius(progress);
+                mArcProgressStackView.postInvalidate();
                 break;
             case R.id.pb_animation_duration:
                 mArcProgressStackView.setAnimationDuration(progress);

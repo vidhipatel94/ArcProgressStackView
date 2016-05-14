@@ -596,7 +596,6 @@ public class ArcProgressStackView extends View {
                 mIsShadowed ? LAYER_TYPE_SOFTWARE : LAYER_TYPE_HARDWARE,
                 mIsShadowed ? mProgressPaint : null
         );
-        postInvalidate();
     }
 
     // Set start elevation pin if gradient round progress
@@ -614,7 +613,6 @@ public class ArcProgressStackView extends View {
                 mIsShadowed ? LAYER_TYPE_SOFTWARE : LAYER_TYPE_HARDWARE,
                 mIsShadowed ? mProgressPaint : null
         );
-        postInvalidate();
     }
 
     // Adjust color alpha(used for shadow reduce)
