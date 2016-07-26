@@ -1,6 +1,7 @@
 package com.gigamole.arcprogressstackview;
 
 import android.animation.Animator;
+import android.animation.AnimatorListenerAdapter;
 import android.animation.ValueAnimator;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -158,25 +159,10 @@ public class MainActivity extends AppCompatActivity implements
                 Log.d("onAnimationUpdate: ", String.valueOf(animation.getAnimatedValue()));
             }
         });
-        mArcProgressStackView.setAnimatorListener(new Animator.AnimatorListener() {
-            @Override
-            public void onAnimationStart(final Animator animation) {
-
-            }
-
+        mArcProgressStackView.setAnimatorListener(new AnimatorListenerAdapter() {
             @Override
             public void onAnimationEnd(final Animator animation) {
                 Toast.makeText(MainActivity.this, "ANIMATION", Toast.LENGTH_SHORT).show();
-            }
-
-            @Override
-            public void onAnimationCancel(final Animator animation) {
-
-            }
-
-            @Override
-            public void onAnimationRepeat(final Animator animation) {
-
             }
         });
 
@@ -219,8 +205,8 @@ public class MainActivity extends AppCompatActivity implements
                 break;
             case R.id.cb_use_vertical_orientation:
                 mArcProgressStackView.setIndicatorOrientation(isChecked ?
-                                ArcProgressStackView.IndicatorOrientation.VERTICAL :
-                                ArcProgressStackView.IndicatorOrientation.HORIZONTAL
+                        ArcProgressStackView.IndicatorOrientation.VERTICAL :
+                        ArcProgressStackView.IndicatorOrientation.HORIZONTAL
                 );
                 break;
             case R.id.cb_use_gradient:
@@ -231,6 +217,8 @@ public class MainActivity extends AppCompatActivity implements
                 }
                 mArcProgressStackView.requestLayout();
                 mArcProgressStackView.postInvalidate();
+                break;
+            default:
                 break;
         }
     }
@@ -254,6 +242,8 @@ public class MainActivity extends AppCompatActivity implements
                 finish();
                 startActivity(getIntent());
                 break;
+            default:
+                break;
         }
     }
 
@@ -264,7 +254,7 @@ public class MainActivity extends AppCompatActivity implements
                 if (mFullSize == -1)
                     mFullSize = mArcProgressStackView.getSize();
                 mArcProgressStackView.getLayoutParams().height = (int) ((mFullSize * 0.5f) +
-                                (int) ((float) mFullSize * 0.5f * ((float) progress / 100.0f)));
+                        (int) ((float) mFullSize * 0.5f * ((float) progress / 100.0f)));
                 mArcProgressStackView.requestLayout();
                 break;
             case R.id.pb_shadow_distance:
@@ -294,17 +284,19 @@ public class MainActivity extends AppCompatActivity implements
             case R.id.pb_sweep_angle:
                 mArcProgressStackView.setSweepAngle(progress);
                 break;
+            default:
+                break;
         }
     }
 
     @Override
     public void onStartTrackingTouch(final SeekBar seekBar) {
-
+        // Empty cause of implement
     }
 
     @Override
     public void onStopTrackingTouch(final SeekBar seekBar) {
-
+        // Empty cause of implement
     }
 
     private void showColorPicker(final boolean isShadowColor) {

@@ -698,16 +698,15 @@ public class ArcProgressStackView extends View {
             actionMoveCurrentSlice = DEFAULT_SLICE;
 
         // Check for handling counter
-        if (actionMoveCurrentSlice != 0) {
-            if ((mActionMoveLastSlice == NEGATIVE_SLICE && actionMoveCurrentSlice == POSITIVE_SLICE) ||
-                    (actionMoveCurrentSlice == NEGATIVE_SLICE && mActionMoveLastSlice == POSITIVE_SLICE)) {
-                if (mActionMoveLastSlice == NEGATIVE_SLICE) mActionMoveSliceCounter++;
-                else mActionMoveSliceCounter--;
+        if (actionMoveCurrentSlice != 0 &&
+                ((mActionMoveLastSlice == NEGATIVE_SLICE && actionMoveCurrentSlice == POSITIVE_SLICE) ||
+                        (actionMoveCurrentSlice == NEGATIVE_SLICE && mActionMoveLastSlice == POSITIVE_SLICE))) {
+            if (mActionMoveLastSlice == NEGATIVE_SLICE) mActionMoveSliceCounter++;
+            else mActionMoveSliceCounter--;
 
-                // Limit counter for 1 and -1, we don`t need take the race
-                if (mActionMoveSliceCounter > 1) mActionMoveSliceCounter = 1;
-                else if (mActionMoveSliceCounter < -1) mActionMoveSliceCounter = -1;
-            }
+            // Limit counter for 1 and -1, we don`t need take the race
+            if (mActionMoveSliceCounter > 1) mActionMoveSliceCounter = 1;
+            else if (mActionMoveSliceCounter < -1) mActionMoveSliceCounter = -1;
         }
         mActionMoveLastSlice = actionMoveCurrentSlice;
 

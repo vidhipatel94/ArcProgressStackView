@@ -1,19 +1,26 @@
-[![Android Arsenal](https://img.shields.io/badge/Android%20Arsenal-ArcProgressStackView-blue.svg?style=flat-square)](http://android-arsenal.com/details/1/3308)
-
 ArcProgressStackView
-===================
+====================
+
 Present your progress bars in arc mode with information and total control.
 
-View size, CB controls     |Typeface, animation     |Draw width, offset, gradient   |Angle, orientation          |Shadow
+[![DevLight](https://lh4.googleusercontent.com/-9btnRFp_eVo/V5cfwZsBpMI/AAAAAAAAC4E/s4NGoezKhpAVdVofAoez1QWpzK5Na8_cQCL0B/w147-h20-no/devlight-badge.png)](http://devlight.com.ua)
+
+[![Android Arsenal](https://img.shields.io/badge/Android%20Arsenal-ArcProgressStackView-yellow.svg?style=flat)](http://android-arsenal.com/details/1/3308)
+[![Android](https://img.shields.io/badge/platform-android-brightgreen.svg?style=flat&label=Platform)](https://github.com/DevLight-Mobile-Agency)
+[![Download](https://api.bintray.com/packages/gigamole/maven/arcprogressstackview/images/download.svg)](https://bintray.com/gigamole/maven/arcprogressstackview/_latestVersion)
+[![Crates.io](https://img.shields.io/crates/l/rustc-serialize.svg?maxAge=2592000&label=License)](https://github.com/DevLight-Mobile-Agency/ArcProgressStackView/blob/master/LICENSE.txt)
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/cc3e2c54db41455e83228d9db0803fae)](https://www.codacy.com/app/gigamole53/ArcProgressStackView?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=DevLight-Mobile-Agency/ArcProgressStackView&amp;utm_campaign=Badge_Grade)
+
+|    |    |    |    |    |
 :-------------------------:|:-------------------------:|:-------------------------:|:-------------------------:|:-------------------------:
 ![](https://lh3.googleusercontent.com/-5wahrBgdCTw/VuwHChXS3FI/AAAAAAAACNQ/eqpqhfnN5G0l3EnETDQ_I5qu4kqQYSysA/w327-h551-no/apsv_preview_size_cb.gif)|![](https://lh4.googleusercontent.com/-c6X1XyKY1go/VuwHCkNghpI/AAAAAAAACNQ/x_xtWAytFPkNrbuEDylIGKNR8mh1jW-rg/w323-h552-no/apsv_preview_typeface_animation.gif)|![](https://lh6.googleusercontent.com/-mz_x7ViHvpQ/VuwHCrwvy-I/AAAAAAAACNQ/vShu09gRxDYv1eekjOLDeSKoHMSluph3w/w325-h552-no/apsv_preview_offset.gif)|![](https://lh6.googleusercontent.com/-iuYi_G-OGrc/VuwHCgvlRNI/AAAAAAAACNQ/LNaGspht3gYsAMJfclfF9InQBzTamHj0Q/w325-h552-no/apsv_preview_angle.gif)|![](https://lh6.googleusercontent.com/-ifOq29FoVrE/VuwHCprAWrI/AAAAAAAACNQ/wLdEYiyV2kwd2rQDQf0QSMe-amHIbhogQ/w325-h552-no/apsv_preview_shadow.gif)
 
-U can check the sample app [here](https://github.com/GIGAMOLE/ArcProgressStackView/tree/master/app).
+You can check the sample app [here](https://github.com/DevLight-Mobile-Agency/ArcProgressStackView/tree/master/app).
 
 Download
 ------------
 
-You can download a .aar` from GitHub's [releases page](https://github.com/GIGAMOLE/ArcProgressStackView/releases).
+You can download a `.aar` from GitHub's [releases page](https://github.com/DevLight-Mobile-Agency/ArcProgressStackView/releases).
 
 Or use Gradle jCenter:
 
@@ -36,6 +43,7 @@ compile 'com.github.gigamole.arcprogressstackview:library:1.0.3'
 ```
 
 Or Maven:
+
 ```xml
 <dependency>
     <groupId>com.github.gigamole.arcprogressstackview</groupId>
@@ -46,17 +54,20 @@ Or Maven:
 ```
 
 Android SDK Version
-=========
-ArcProgressStackView requires a minimum sdk version of 8, but if you want animation and shadow support it requires a minimum sdk version of 11.
+===================
 
-Sample
-========
+`ArcProgressStackView` requires a minimum SDK version of 8, but if you want animation and shadow support it requires a minimum SDK version of 11.
 
-For APSV you can set such parameters as:
+Sample<b>Parameters</b>
+======
+
+<b>Parameters</b>
+
+For `APSV` you can set such parameters as:
 
  - models:
 
-    allows you to set APSV models, where you set title, progress and colors. Can be set up only via code.
+    allows you to set `APSV` models, where you set title, progress and colors. Can be set up only via code.
 
  - animation:
 
@@ -64,7 +75,7 @@ For APSV you can set such parameters as:
 
  - shadow:
 
-    allows you to add shadow to your progress models, but remember, the shadow need LAYER_TYPE_SOFTWARE, so it decrease FPS.
+    allows you to add shadow to your progress models, but remember, the shadow need `LAYER_TYPE_SOFTWARE`, so it decrease FPS.
 
  - round corners:
 
@@ -142,9 +153,13 @@ For APSV you can set such parameters as:
 
     allows you to set models background preview color.
 
+<b>Tips</b>
+
 All angle variables can only be positive and be in range from 0 to 360 degrees.
 
-The size of view automatically set up in square mode.
+The size of `View` automatically set up in square mode.
+
+<b>Init</b>
 
 Check out in code init:
 
@@ -193,19 +208,22 @@ And XML init:
 Getting Help
 ======
 
-To report a specific problem or feature request, [open a new issue on Github](https://github.com/GIGAMOLE/ArcProgressStackView/issues/new).
+To report a specific problem or feature request, [open a new issue on Github](https://github.com/DevLight-Mobile-Agency/ArcProgressStackView/issues/new).
 
 License
 ======
-
-Apache 2.0. See LICENSE file for details.
+Apache 2.0 and MIT. See [LICENSE](https://github.com/DevLight-Mobile-Agency/ArcProgressStackView/blob/master/LICENSE.txt) file for details.
 
 Inspiration
 ======
 
-[Here](https://www.behance.net/gallery/33128783/12-weeks-marathon-in-Sketch), [here](https://www.pinterest.com/pin/460915343094746684/), [here] (https://www.pinterest.com/pin/531424824760607320/), also [here] (https://www.pinterest.com/pin/149111437639569450/) and [here] (https://www.pinterest.com/pin/438538082442328565/)
+|   	|   	|   	|   	|   	|   	|
+|:-:	|:-:	|:-:	|:-:	|:-:	|:-:	|
+![](https://lh5.googleusercontent.com/-7BVqroskfPs/V5dtQZVAlhI/AAAAAAAAC4c/PXf2UAkDhxQVJhF96wSXyi-L52gejAN_ACL0B/w304-h530-no/apsv.png)|![](https://d13yacurqjgara.cloudfront.net/users/224485/screenshots/2088708/new-loan1-2.gif)|![](https://d13yacurqjgara.cloudfront.net/users/124059/screenshots/1926158/attachments/352243/shot.gif)|![](https://s-media-cache-ak0.pinimg.com/564x/47/82/e0/4782e07bd49cc2d1d19f73ff5735a1ea.jpg)|![](https://d13yacurqjgara.cloudfront.net/users/107759/screenshots/2060933/awuikit.gif)
 
 Author
 =======
 
-Basil Miller - @gigamole
+Made in [DevLight Mobile Agency](https://github.com/DevLight-Mobile-Agency)
+
+Created by [Basil Miller](https://github.com/GIGAMOLE) - [@gigamole](mailto:gigamole53@gmail.com)
