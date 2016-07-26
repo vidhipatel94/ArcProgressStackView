@@ -217,8 +217,8 @@ Apache 2.0 and MIT. See [LICENSE](https://github.com/DevLight-Mobile-Agency/ArcP
 Inspiration
 ======
 
-|   	|   	|   	|   	|   	|
-|:-:	|:-:	|:-:	|:-:	|:-:	|
+|   	|   	|   	|   	|
+|:-:	|:-:	|:-:	|:-:	|
 ![](https://lh5.googleusercontent.com/-7BVqroskfPs/V5dtQZVAlhI/AAAAAAAAC4c/PXf2UAkDhxQVJhF96wSXyi-L52gejAN_ACL0B/w304-h530-no/apsv.png)|![](https://d13yacurqjgara.cloudfront.net/users/124059/screenshots/1926158/attachments/352243/shot.gif)|![](https://s-media-cache-ak0.pinimg.com/564x/47/82/e0/4782e07bd49cc2d1d19f73ff5735a1ea.jpg)|![](https://d13yacurqjgara.cloudfront.net/users/107759/screenshots/2060933/awuikit.gif)
 
 Author
