@@ -1,24 +1,42 @@
+<br/>
+<p align="center">
+  <a href="http://devlight.io">
+      <img src ="https://drive.google.com/uc?export=download&id=0BxPO_UeS7wScLVBKck51Z1Rzb0E" alt="Devlight"/>
+  </a>
+</p>
+<br/>
+
 ArcProgressStackView
 ====================
 
 Present your progress bars in arc mode with information and total control.
 
-[![DevLight](https://lh4.googleusercontent.com/-9btnRFp_eVo/V5cfwZsBpMI/AAAAAAAAC4E/s4NGoezKhpAVdVofAoez1QWpzK5Na8_cQCL0B/w147-h20-no/devlight-badge.png)](http://devlight.com.ua)
+[![Android Arsenal](https://drive.google.com/uc?export=download&id=0BxPO_UeS7wScTm9HT0JzcmpHOVE)](http://android-arsenal.com/details/1/3308)
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+[![Android](https://drive.google.com/uc?export=download&id=0BxPO_UeS7wSccEZaclNGN0R5OWc)](https://github.com/DevLight-Mobile-Agency)
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+[![Download](https://drive.google.com/uc?export=download&id=0BxPO_UeS7wScaDl2U0QtWUx3emM)](https://bintray.com/gigamole/maven/arcprogressstackview/_latestVersion)
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+[![License](https://drive.google.com/uc?export=download&id=0BxPO_UeS7wScU0tmeFpGMHVWNWs)](https://github.com/DevLight-Mobile-Agency/ArcProgressStackView/blob/master/LICENSE.txt)
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+[![Codacy](https://drive.google.com/uc?export=download&id=0BxPO_UeS7wScSHhmckZyeGJDcXc)](https://www.codacy.com/app/gigamole53/ArcProgressStackView?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=DevLight-Mobile-Agency/ArcProgressStackView&amp;utm_campaign=Badge_Grade)
 
-[![Android Arsenal](https://img.shields.io/badge/Android%20Arsenal-ArcProgressStackView-yellow.svg?style=flat)](http://android-arsenal.com/details/1/3308)
-[![Android](https://img.shields.io/badge/platform-android-brightgreen.svg?style=flat&label=Platform)](https://github.com/DevLight-Mobile-Agency)
-[![Download](https://api.bintray.com/packages/gigamole/maven/arcprogressstackview/images/download.svg)](https://bintray.com/gigamole/maven/arcprogressstackview/_latestVersion)
-[![Crates.io](https://img.shields.io/crates/l/rustc-serialize.svg?maxAge=2592000&label=License)](https://github.com/DevLight-Mobile-Agency/ArcProgressStackView/blob/master/LICENSE.txt)
-[![Codacy Badge](https://api.codacy.com/project/badge/Grade/cc3e2c54db41455e83228d9db0803fae)](https://www.codacy.com/app/gigamole53/ArcProgressStackView?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=DevLight-Mobile-Agency/ArcProgressStackView&amp;utm_campaign=Badge_Grade)
+<br/>
 
-|    |    |    |    |    |
-:-------------------------:|:-------------------------:|:-------------------------:|:-------------------------:|:-------------------------:
-![](https://lh3.googleusercontent.com/-5wahrBgdCTw/VuwHChXS3FI/AAAAAAAACNQ/eqpqhfnN5G0l3EnETDQ_I5qu4kqQYSysA/w327-h551-no/apsv_preview_size_cb.gif)|![](https://lh4.googleusercontent.com/-c6X1XyKY1go/VuwHCkNghpI/AAAAAAAACNQ/x_xtWAytFPkNrbuEDylIGKNR8mh1jW-rg/w323-h552-no/apsv_preview_typeface_animation.gif)|![](https://lh6.googleusercontent.com/-mz_x7ViHvpQ/VuwHCrwvy-I/AAAAAAAACNQ/vShu09gRxDYv1eekjOLDeSKoHMSluph3w/w325-h552-no/apsv_preview_offset.gif)|![](https://lh6.googleusercontent.com/-iuYi_G-OGrc/VuwHCgvlRNI/AAAAAAAACNQ/LNaGspht3gYsAMJfclfF9InQBzTamHj0Q/w325-h552-no/apsv_preview_angle.gif)|![](https://lh6.googleusercontent.com/-ifOq29FoVrE/VuwHCprAWrI/AAAAAAAACNQ/wLdEYiyV2kwd2rQDQf0QSMe-amHIbhogQ/w325-h552-no/apsv_preview_shadow.gif)
+<table align="center">
+    <tr>
+        <td><img src="https://drive.google.com/uc?export=download&id=0BxPO_UeS7wScTm9ZSlBMVlhmQ0k"/></td>
+        <td><img src="https://drive.google.com/uc?export=download&id=0BxPO_UeS7wScVXhJN0xQUThwVmc"/></td>
+        <td><img src="https://drive.google.com/uc?export=download&id=0BxPO_UeS7wScMjMydHVxOU5veWc"/></td>
+        <td><img src="https://drive.google.com/uc?export=download&id=0BxPO_UeS7wScM2NYdGQ5aEVsWTQ"/></td>
+        <td><img src="https://drive.google.com/uc?export=download&id=0BxPO_UeS7wScRTJMTF91V0NaYVE"/></td>
+    </tr>
+</table>
 
 You can check the sample app [here](https://github.com/DevLight-Mobile-Agency/ArcProgressStackView/tree/master/app).
 
 Download
-------------
+========
 
 You can download a `.aar` from GitHub's [releases page](https://github.com/DevLight-Mobile-Agency/ArcProgressStackView/releases).
 
@@ -65,98 +83,75 @@ Sample
 
 For `APSV` you can set such parameters as:
 
- - models:
-
+ - models:  
     allows you to set `APSV` models, where you set title, progress and colors. Can be set up only via code.
 
- - animation:
-
+ - animation:  
     allows you to animate progress with func call or with touch event.
 
- - shadow:
-
+ - shadow:  
     allows you to add shadow to your progress models, but remember, the shadow need `LAYER_TYPE_SOFTWARE`, so it decrease FPS.
 
- - round corners:
-
+ - round corners:  
     allows you to set round corners to models.
 
- - drag/seek:
-
+ - drag/seek:  
     allows you to make your progress model seek like.
 
- - typeface:
-
+ - typeface:  
     allows you to set custom typeface.
 
- - text color:
-
+ - text color:  
     allows you to set text(title and progress indicator) color.
 
- - shadow distance:
-
+ - shadow distance:  
     allows you to set shadow distance.
 
- - shadow angle:
-
+ - shadow angle:  
     allows you to set shadow angle.
 
- - shadow radius:
-
+ - shadow radius:  
      allows you to set shadow radius.
 
- - shadow color:
-
+ - shadow color:  
      allows you to set shadow color.
 
- - animation duration:
-
+ - animation duration:  
      allows you to set animation duration.
 
- - animation listener:
-
+ - animation listener:  
      allows you to set animation listener.
 
- - interpolator:
-
+ - interpolator:  
      allows you to set interpolator to animation.
 
- - draw width:
-
+ - draw width:  
      allows you to set draw width in fraction mode(e.g. 55%) or dimension mode.
 
- - model offset:
-
+ - model offset:  
      allows you to set model offset(positive or negative).
 
- - model background:
-
+ - model background:  
      allows you to set model background track from start angle to sweep angle.
 
- - start angle:
-
+ - start angle:  
      allows you to set start angle of models.
 
- - sweep angle:
-
+ - sweep angle:  
      allows you to set sweep angle of models.
 
- - progress indicator orientation:
-
+ - progress indicator orientation:  
      allows you to set progress indicator orientation.
 
- - preview colors:
-
+ - preview colors:  
      allows you to set preview colors, which generate count of models equals to count of colors.
 
- - preview background:
-
+ - preview background:  
     allows you to set models background preview color.
 
 <b>Tips</b>
 
-All angle variables can only be positive and be in range from 0 to 360 degrees.
-
+All angle variables can only be positive and be in range from 0 to 360 degrees.  
 The size of `View` automatically set up in square mode.
 
 <b>Init</b>
@@ -176,7 +171,7 @@ arcProgressStackView.setModels(models);
 
 Other methods check out in sample.
 
-And XML init:
+And `XML` init:
 
 ```xml
 <com.gigamole.samples.ArcProgressStackView
@@ -206,37 +201,36 @@ And XML init:
 ```
 
 Getting Help
-======
+============
 
 To report a specific problem or feature request, [open a new issue on Github](https://github.com/DevLight-Mobile-Agency/ArcProgressStackView/issues/new).
 
-License
-======
-Apache 2.0 and MIT. See [LICENSE](https://github.com/DevLight-Mobile-Agency/ArcProgressStackView/blob/master/LICENSE.txt) file for details.
-
-Inspiration
-======
-
-|   	|   	|   	|   	|
-|:-:	|:-:	|:-:	|:-:	|
-![](https://lh5.googleusercontent.com/-7BVqroskfPs/V5dtQZVAlhI/AAAAAAAAC4c/PXf2UAkDhxQVJhF96wSXyi-L52gejAN_ACL0B/w304-h530-no/apsv.png)|![](https://lh6.googleusercontent.com/-KSpOkui03LI/V5dzntfZDlI/AAAAAAAAC6Q/gWLhxSPPyU03snJk5UsS1DQ0CM6g4bDqwCL0B/w236-h414-no/apsv2.png)|![](https://s-media-cache-ak0.pinimg.com/564x/47/82/e0/4782e07bd49cc2d1d19f73ff5735a1ea.jpg)|![](https://d13yacurqjgara.cloudfront.net/users/107759/screenshots/2060933/awuikit.gif)
-
-Author
+Credits
 =======
 
-Made in [DevLight Mobile Agency](https://github.com/DevLight-Mobile-Agency)
+|[Ron Evgeniy](https://www.behance.net/RonEvgeniy)|[Virgil Pana](https://dribbble.com/virgilpana)|   	|   	|
+|:-----------------------------------------------:|:--------------------------------------------:|:-:|:-:|
+|[![](https://mir-s3-cdn-cf.behance.net/project_modules/1400/47e59433128783.570c133a2084b.png)](https://www.behance.net/gallery/33128783/12-weeks-marathon-in-Sketch)|[![](https://d13yacurqjgara.cloudfront.net/users/124059/screenshots/1926158/attachments/352243/shot.gif)](https://dribbble.com/shots/1926158-Data-Visualization)||
+
+Author
+======
 
 Created by [Basil Miller](https://github.com/GIGAMOLE) - [@gigamole](mailto:gigamole53@gmail.com)
 
-Support
+Company
 =======
 
-If you'd like to support future development and new product features, please make a payments on Gratipay and Beerpay or become a patron on Patreon.
+[![Facebook](https://drive.google.com/uc?export=download&id=0BxPO_UeS7wScaGhGVFNKU0VxMnc)](https://www.facebook.com/devlightagency)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[![Twitter](https://drive.google.com/uc?export=download&id=0BxPO_UeS7wScZ1ExQWh5cHF5cVE)](https://twitter.com/DevLightIO)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[![LinkedIn](https://drive.google.com/uc?export=download&id=0BxPO_UeS7wSccGZINzEycE1nVFE)](https://www.linkedin.com/company/devlight)
 
-[![Gratipay](https://img.shields.io/gratipay/user/gigamole.svg?maxAge=2592000)](https://gratipay.com/~GIGAMOLE/)
-[![Beerpay](https://beerpay.io/DevLight-Mobile-Agency/ArcProgressStackView/badge.svg?style=flat)](https://beerpay.io/DevLight-Mobile-Agency/ArcProgressStackView)
-[![Patreon](https://lh5.googleusercontent.com/-lXI_oKp5724/V58ysdDtxHI/AAAAAAAAC7s/g91W_YT2SM0Q_VaIhDAMmoe-jHPP3ijJwCL0B/w140-h20-no/patreon-badge.png)](https://www.patreon.com/gigamole)
+[Here](https://github.com/DevLight-Mobile-Agency) you can see open source work developed by Devlight LLC.  
+This and another works is an exclusive property of Devlight LLC. 
 
-Also, if you use this library in applications that are available on Google Play, please report it to us or author.
+If you want to use this library in applications which will be available on Google Play, please report us or author of the library about it.
 
+Whether you're searching for a new partner or trusted team for creating your new great product we are always ready to start work with you. 
+
+You can contact us: info@devlight.io or opensource@devlight.io.  
 Thanks in advance.
+
+Devlight LLC, 2016  
+[devlight.io](http://devlight.io)
