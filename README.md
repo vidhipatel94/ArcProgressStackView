@@ -208,7 +208,7 @@ Credits
 
 |[Ron Evgeniy](https://www.behance.net/RonEvgeniy)|[Virgil Pana](https://dribbble.com/virgilpana)|   	|   	|
 |:-----------------------------------------------:|:--------------------------------------------:|:-:|:-:|
-|[![](https://drive.google.com/uc?export=download&id=0BxPO_UeS7wScZmFTcTQ3NlhMRWM)](https://www.behance.net/gallery/33128783/12-weeks-marathon-in-Sketch)|[![](https://d13yacurqjgara.cloudfront.net/users/124059/screenshots/1926158/attachments/352243/shot.gif)](https://dribbble.com/shots/1926158-Data-Visualization)||
+|[![](https://drive.google.com/file/d/0BxPO_UeS7wScQm9QbjV4VWh2R2c/view?usp=sharing)](https://www.behance.net/gallery/33128783/12-weeks-marathon-in-Sketch)|[![](https://drive.google.com/uc?export=download&id=0BxPO_UeS7wScc1Qyd0pMQm5vd0U)](https://dribbble.com/shots/1926158-Data-Visualization)||
 
 Author
 ======
