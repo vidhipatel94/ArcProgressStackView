@@ -21,8 +21,6 @@ Present your progress bars in arc mode with information and total control.
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 [![Codacy](https://drive.google.com/uc?export=download&id=0BxPO_UeS7wScSHhmckZyeGJDcXc)](https://www.codacy.com/app/gigamole53/ArcProgressStackView?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=DevLight-Mobile-Agency/ArcProgressStackView&amp;utm_campaign=Badge_Grade)
 
-<br/>
-
 <table align="center">
     <tr>
         <td><img src="https://drive.google.com/uc?export=download&id=0BxPO_UeS7wScTm9ZSlBMVlhmQ0k"/></td>
@@ -210,7 +208,7 @@ Credits
 
 |[Ron Evgeniy](https://www.behance.net/RonEvgeniy)|[Virgil Pana](https://dribbble.com/virgilpana)|   	|   	|
 |:-----------------------------------------------:|:--------------------------------------------:|:-:|:-:|
-|[![](https://mir-s3-cdn-cf.behance.net/project_modules/1400/47e59433128783.570c133a2084b.png)](https://www.behance.net/gallery/33128783/12-weeks-marathon-in-Sketch)|[![](https://d13yacurqjgara.cloudfront.net/users/124059/screenshots/1926158/attachments/352243/shot.gif)](https://dribbble.com/shots/1926158-Data-Visualization)||
+|[![](https://drive.google.com/uc?export=download&id=0BxPO_UeS7wScZmFTcTQ3NlhMRWM)](https://www.behance.net/gallery/33128783/12-weeks-marathon-in-Sketch)|[![](https://d13yacurqjgara.cloudfront.net/users/124059/screenshots/1926158/attachments/352243/shot.gif)](https://dribbble.com/shots/1926158-Data-Visualization)||
 
 Author
 ======
