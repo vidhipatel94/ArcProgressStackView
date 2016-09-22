@@ -1,7 +1,10 @@
 <resources>
 
     <!-- Base application theme. -->
-    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar"/>
+    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="android:colorControlActivated">#ffa70b</item>
+        <item name="colorControlActivated">#ffa70b</item>
+    </style>
 
     <style name="DisableElevation">
         <item name="android:zAdjustment">normal</item>

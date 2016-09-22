@@ -14,15 +14,17 @@
  * limitations under the License.
  */
 
-package com.gigamole.library;
+package devlight.io.library;
 
 import android.animation.ValueAnimator;
+import android.annotation.SuppressLint;
 import android.annotation.TargetApi;
 import android.content.Context;
 import android.content.res.Resources;
 import android.content.res.TypedArray;
 import android.graphics.Canvas;
 import android.graphics.Color;
+import android.graphics.CornerPathEffect;
 import android.graphics.Paint;
 import android.graphics.Path;
 import android.graphics.PathMeasure;
@@ -32,6 +34,7 @@ import android.graphics.SweepGradient;
 import android.graphics.Typeface;
 import android.os.Build;
 import android.support.annotation.FloatRange;
+import android.support.v4.view.ViewCompat;
 import android.text.TextPaint;
 import android.text.TextUtils;
 import android.util.AttributeSet;
@@ -43,6 +46,7 @@ import android.view.animation.AnimationUtils;
 import android.view.animation.Interpolator;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 
 /**
@@ -52,34 +56,34 @@ import java.util.Random;
 public class ArcProgressStackView extends View {
 
     // Default values
-    private final static float DEFAULT_START_ANGLE = 270.0f;
-    private final static float DEFAULT_SWEEP_ANGLE = 360.0f;
-    private final static float DEFAULT_DRAW_WIDTH_FRACTION = 0.7f;
-    private final static float DEFAULT_MODEL_OFFSET = 5.0f;
-    private final static float DEFAULT_SHADOW_RADIUS = 30.0f;
-    private final static float DEFAULT_SHADOW_DISTANCE = 15.0f;
-    private final static float DEFAULT_SHADOW_ANGLE = 90.0f;
+    private final static float DEFAULT_START_ANGLE = 270.0F;
+    private final static float DEFAULT_SWEEP_ANGLE = 360.0F;
+    private final static float DEFAULT_DRAW_WIDTH_FRACTION = 0.7F;
+    private final static float DEFAULT_MODEL_OFFSET = 5.0F;
+    private final static float DEFAULT_SHADOW_RADIUS = 30.0F;
+    private final static float DEFAULT_SHADOW_DISTANCE = 15.0F;
+    private final static float DEFAULT_SHADOW_ANGLE = 90.0F;
     private final static int DEFAULT_ANIMATION_DURATION = 350;
     private final static int DEFAULT_ACTION_MOVE_ANIMATION_DURATION = 150;
 
     // Max and min progress values
-    private final static float MAX_PROGRESS = 100;
-    private final static float MIN_PROGRESS = 0;
+    private final static float MAX_PROGRESS = 100.0F;
+    private final static float MIN_PROGRESS = 0.0F;
 
     // Max and min fraction values
-    private final static float MAX_FRACTION = 1.0f;
-    private final static float MIN_FRACTION = 0.0f;
+    private final static float MAX_FRACTION = 1.0F;
+    private final static float MIN_FRACTION = 0.0F;
 
     // Max and min end angle
-    private final static float MAX_ANGLE = 360.0f;
-    private final static float MIN_ANGLE = 0.0f;
+    private final static float MAX_ANGLE = 360.0F;
+    private final static float MIN_ANGLE = 0.0F;
 
     // Min shadow
-    private final static float MIN_SHADOW = 0.0f;
+    private final static float MIN_SHADOW = 0.0F;
 
     // Action move constants
-    private final static float POSITIVE_ANGLE = 90.0f;
-    private final static float NEGATIVE_ANGLE = 270.0f;
+    private final static float POSITIVE_ANGLE = 90.0F;
+    private final static float NEGATIVE_ANGLE = 270.0F;
     private final static int POSITIVE_SLICE = 1;
     private final static int NEGATIVE_SLICE = -1;
     private final static int DEFAULT_SLICE = 0;
@@ -94,7 +98,7 @@ public class ArcProgressStackView extends View {
     private float mSweepAngle;
 
     // Progress models
-    private ArrayList<Model> mModels = new ArrayList<>();
+    private List<Model> mModels = new ArrayList<>();
 
     // Progress and text paints
     private final Paint mProgressPaint = new Paint(Paint.ANTI_ALIAS_FLAG) {
@@ -107,6 +111,13 @@ public class ArcProgressStackView extends View {
         {
             setDither(true);
             setTextAlign(Align.LEFT);
+        }
+    };
+    private final Paint mLevelPaint = new Paint(Paint.ANTI_ALIAS_FLAG) {
+        {
+            setDither(true);
+            setStyle(Paint.Style.FILL_AND_STROKE);
+            setPathEffect(new CornerPathEffect(0.5F));
         }
     };
 
@@ -138,6 +149,7 @@ public class ArcProgressStackView extends View {
     private boolean mIsRounded;
     private boolean mIsDragged;
     private boolean mIsModelBgEnabled;
+    private boolean mIsLeveled;
 
     // Colors
     private int mShadowColor;
@@ -173,6 +185,8 @@ public class ArcProgressStackView extends View {
 
         // Always draw
         setWillNotDraw(false);
+        setLayerType(LAYER_TYPE_SOFTWARE, null);
+        ViewCompat.setLayerType(this, ViewCompat.LAYER_TYPE_SOFTWARE, null);
 
         // Detect if features available
         mIsFeaturesAvailable = Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB;
@@ -191,6 +205,9 @@ public class ArcProgressStackView extends View {
             );
             setIsDragged(
                     typedArray.getBoolean(R.styleable.ArcProgressStackView_apsv_dragged, false)
+            );
+            setIsLeveled(
+                    typedArray.getBoolean(R.styleable.ArcProgressStackView_apsv_leveled, false)
             );
             setTypeface(
                     typedArray.getString(R.styleable.ArcProgressStackView_apsv_typeface)
@@ -337,6 +354,10 @@ public class ArcProgressStackView extends View {
         }
     }
 
+    public ValueAnimator getProgressAnimator() {
+        return mProgressAnimator;
+    }
+
     public long getAnimationDuration() {
         return mAnimationDuration;
     }
@@ -352,8 +373,10 @@ public class ArcProgressStackView extends View {
     }
 
     public void setAnimatorListener(final ValueAnimator.AnimatorListener animatorListener) {
+        if (mAnimatorListener != null) mProgressAnimator.removeListener(mAnimatorListener);
+
         mAnimatorListener = animatorListener;
-        mProgressAnimator.addListener(mAnimatorListener);
+        mProgressAnimator.addListener(animatorListener);
     }
 
     public ValueAnimator.AnimatorUpdateListener getAnimatorUpdateListener() {
@@ -368,6 +391,7 @@ public class ArcProgressStackView extends View {
         return mStartAngle;
     }
 
+    @SuppressLint("SupportAnnotationUsage")
     @FloatRange
     public void setStartAngle(@FloatRange(from = MIN_ANGLE, to = MAX_ANGLE) final float startAngle) {
         mStartAngle = Math.max(MIN_ANGLE, Math.min(startAngle, MAX_ANGLE));
@@ -378,17 +402,18 @@ public class ArcProgressStackView extends View {
         return mSweepAngle;
     }
 
+    @SuppressLint("SupportAnnotationUsage")
     @FloatRange
     public void setSweepAngle(@FloatRange(from = MIN_ANGLE, to = MAX_ANGLE) final float sweepAngle) {
         mSweepAngle = Math.max(MIN_ANGLE, Math.min(sweepAngle, MAX_ANGLE));
         postInvalidate();
     }
 
-    public ArrayList<Model> getModels() {
+    public List<Model> getModels() {
         return mModels;
     }
 
-    public void setModels(final ArrayList<Model> models) {
+    public void setModels(final List<Model> models) {
         mModels.clear();
         mModels = models;
         requestLayout();
@@ -455,6 +480,15 @@ public class ArcProgressStackView extends View {
         mIsDragged = isDragged;
     }
 
+    public boolean isLeveled() {
+        return mIsLeveled;
+    }
+
+    public void setIsLeveled(final boolean isLeveled) {
+        mIsLeveled = mIsFeaturesAvailable && isLeveled;
+        requestLayout();
+    }
+
     public Interpolator getInterpolator() {
         return (Interpolator) mProgressAnimator.getInterpolator();
     }
@@ -478,10 +512,11 @@ public class ArcProgressStackView extends View {
         return mDrawWidthFraction;
     }
 
+    @SuppressLint("SupportAnnotationUsage")
     @FloatRange
     public void setDrawWidthFraction(@FloatRange(from = MIN_FRACTION, to = MAX_FRACTION) final float drawWidthFraction) {
         // Divide by half for radius and reset
-        mDrawWidthFraction = Math.max(MIN_FRACTION, Math.min(drawWidthFraction, MAX_FRACTION)) * 0.5f;
+        mDrawWidthFraction = Math.max(MIN_FRACTION, Math.min(drawWidthFraction, MAX_FRACTION)) * 0.5F;
         mDrawWidthDimension = MIN_FRACTION;
         requestLayout();
     }
@@ -510,6 +545,7 @@ public class ArcProgressStackView extends View {
         return mShadowAngle;
     }
 
+    @SuppressLint("SupportAnnotationUsage")
     @FloatRange
     public void setShadowAngle(@FloatRange(from = MIN_ANGLE, to = MAX_ANGLE) final float shadowAngle) {
         mShadowAngle = Math.max(MIN_ANGLE, Math.min(shadowAngle, MAX_ANGLE));
@@ -554,8 +590,7 @@ public class ArcProgressStackView extends View {
     public void setTypeface(final String typeface) {
         Typeface tempTypeface;
         try {
-            if (isInEditMode())
-                return;
+            if (isInEditMode()) return;
             tempTypeface = Typeface.createFromAsset(getContext().getAssets(), typeface);
         } catch (Exception e) {
             tempTypeface = Typeface.create(Typeface.DEFAULT, Typeface.NORMAL);
@@ -581,38 +616,28 @@ public class ArcProgressStackView extends View {
 
     // Reset shadow layer
     private void resetShadowLayer() {
-        if (isInEditMode())
-            return;
+        if (isInEditMode()) return;
 
         final float newDx =
-                (float) ((mShadowDistance) * Math.cos((mShadowAngle - mStartAngle) / 180.0f * Math.PI));
+                (float) ((mShadowDistance) * Math.cos((mShadowAngle - mStartAngle) / 180.0F * Math.PI));
         final float newDy =
-                (float) ((mShadowDistance) * Math.sin((mShadowAngle - mStartAngle) / 180.0f * Math.PI));
+                (float) ((mShadowDistance) * Math.sin((mShadowAngle - mStartAngle) / 180.0F * Math.PI));
 
         if (mIsShadowed)
             mProgressPaint.setShadowLayer(mShadowRadius, newDx, newDy, mShadowColor);
         else mProgressPaint.clearShadowLayer();
-        setLayerType(
-                mIsShadowed ? LAYER_TYPE_SOFTWARE : LAYER_TYPE_HARDWARE,
-                mIsShadowed ? mProgressPaint : null
-        );
     }
 
     // Set start elevation pin if gradient round progress
-    private void setStartGradientRoundedShadowLayer() {
-        if (isInEditMode())
-            return;
+    private void setLevelShadowLayer() {
+        if (isInEditMode()) return;
 
-        if (mIsShadowed) {
+        if (mIsShadowed || mIsLeveled) {
             final float shadowOffset = mShadowRadius * 0.5f;
-            mProgressPaint.setShadowLayer(
+            mLevelPaint.setShadowLayer(
                     shadowOffset, 0.0f, -shadowOffset, adjustColorAlpha(mShadowColor, 0.5f)
             );
-        } else mProgressPaint.clearShadowLayer();
-        setLayerType(
-                mIsShadowed ? LAYER_TYPE_SOFTWARE : LAYER_TYPE_HARDWARE,
-                mIsShadowed ? mProgressPaint : null
-        );
+        } else mLevelPaint.clearShadowLayer();
     }
 
     // Adjust color alpha(used for shadow reduce)
@@ -627,14 +652,13 @@ public class ArcProgressStackView extends View {
 
     // Animate progress
     public void animateProgress() {
-        if (!mIsAnimated || mProgressAnimator == null)
-            return;
-
+        if (!mIsAnimated || mProgressAnimator == null) return;
+        if (mProgressAnimator.isRunning()) {
+            if (mAnimatorListener != null) mProgressAnimator.removeListener(mAnimatorListener);
+            mProgressAnimator.cancel();
+        }
         // Set to animate all models
         mActionMoveModelIndex = ANIMATE_ALL_INDEX;
-
-        if (mProgressAnimator.isRunning())
-            mProgressAnimator.cancel();
         mProgressAnimator.setDuration(mAnimationDuration);
         mProgressAnimator.setInterpolator(mInterpolator);
         if (mAnimatorListener != null) {
@@ -646,11 +670,9 @@ public class ArcProgressStackView extends View {
 
     // Animate progress
     private void animateActionMoveProgress() {
-        if (!mIsAnimated || mProgressAnimator == null)
-            return;
+        if (!mIsAnimated || mProgressAnimator == null) return;
+        if (mProgressAnimator.isRunning()) return;
 
-        if (mProgressAnimator.isRunning())
-            mProgressAnimator.cancel();
         mProgressAnimator.setDuration(DEFAULT_ACTION_MOVE_ANIMATION_DURATION);
         mProgressAnimator.setInterpolator(null);
         if (mAnimatorListener != null) mProgressAnimator.removeListener(mAnimatorListener);
@@ -660,30 +682,27 @@ public class ArcProgressStackView extends View {
     // Get the angle of action move model
     private float getActionMoveAngle(final float x, final float y) {
         //Get radius
-        final float radius = mSize * 0.5f;
+        final float radius = mSize * 0.5F;
 
         // Get degrees without offset
-        float degrees = (float) ((Math.toDegrees(Math.atan2(y - radius, x - radius)) + 360.0f) % 360.0f);
-        if (degrees < 0)
-            degrees += 2.0f * Math.PI;
+        float degrees = (float) ((Math.toDegrees(Math.atan2(y - radius, x - radius)) + 360.0F) % 360.0F);
+        if (degrees < 0) degrees += 2.0F * Math.PI;
 
         // Get point with offset relative to start angle
         final float newActionMoveX =
-                (float) (radius * Math.cos((degrees - mStartAngle) / 180.0f * Math.PI));
+                (float) (radius * Math.cos((degrees - mStartAngle) / 180.0F * Math.PI));
         final float newActionMoveY =
-                (float) (radius * Math.sin((degrees - mStartAngle) / 180.0f * Math.PI));
+                (float) (radius * Math.sin((degrees - mStartAngle) / 180.0F * Math.PI));
 
         // Set new angle with offset
-        degrees = (float) ((Math.toDegrees(Math.atan2(newActionMoveY, newActionMoveX)) + 360.0f) % 360.0f);
-        if (degrees < 0)
-            degrees += 2.0f * Math.PI;
+        degrees = (float) ((Math.toDegrees(Math.atan2(newActionMoveY, newActionMoveX)) + 360.0F) % 360.0F);
+        if (degrees < 0) degrees += 2.0F * Math.PI;
 
         return degrees;
     }
 
     private void handleActionMoveModel(final MotionEvent event) {
-        if (mActionMoveModelIndex == DISABLE_ANIMATE_INDEX)
-            return;
+        if (mActionMoveModelIndex == DISABLE_ANIMATE_INDEX) return;
 
         // Get current move angle
         float currentAngle = getActionMoveAngle(event.getX(), event.getY());
@@ -694,8 +713,7 @@ public class ArcProgressStackView extends View {
             actionMoveCurrentSlice = POSITIVE_SLICE;
         else if (currentAngle > NEGATIVE_ANGLE && currentAngle < MAX_ANGLE)
             actionMoveCurrentSlice = NEGATIVE_SLICE;
-        else
-            actionMoveCurrentSlice = DEFAULT_SLICE;
+        else actionMoveCurrentSlice = DEFAULT_SLICE;
 
         // Check for handling counter
         if (actionMoveCurrentSlice != 0 &&
@@ -717,7 +735,7 @@ public class ArcProgressStackView extends View {
         // Check whether traveled angle out of limit
         if (actionMoveTotalAngle < MIN_ANGLE || actionMoveTotalAngle > MAX_ANGLE) {
             actionMoveTotalAngle =
-                    actionMoveTotalAngle > MAX_ANGLE ? MAX_ANGLE + 1.0f : -1.0f;
+                    actionMoveTotalAngle > MAX_ANGLE ? MAX_ANGLE + 1.0F : -1.0F;
             currentAngle = actionMoveTotalAngle;
         }
 
@@ -728,25 +746,23 @@ public class ArcProgressStackView extends View {
 
     @Override
     public boolean onTouchEvent(final MotionEvent event) {
-        if (!mIsDragged)
-            return super.onTouchEvent(event);
+        if (!mIsDragged) return super.onTouchEvent(event);
 
         switch (event.getAction()) {
             case MotionEvent.ACTION_DOWN:
                 mActionMoveModelIndex = DISABLE_ANIMATE_INDEX;
                 // Get current move angle and check whether touched angle is in sweep angle zone
                 float currentAngle = getActionMoveAngle(event.getX(), event.getY());
-                if (currentAngle > mSweepAngle && currentAngle < MAX_ANGLE)
-                    break;
+                if (currentAngle > mSweepAngle && currentAngle < MAX_ANGLE) break;
 
                 for (int i = 0; i < mModels.size(); i++) {
                     final Model model = mModels.get(i);
                     // Check if our model contains touch points
                     if (model.mBounds.contains(event.getX(), event.getY())) {
                         // Check variables for handle touch in progress model zone
-                        float modelRadius = model.mBounds.width() * 0.5f;
-                        float modelOffset = mProgressModelSize * 0.5f;
-                        float mainRadius = mSize * 0.5f;
+                        float modelRadius = model.mBounds.width() * 0.5F;
+                        float modelOffset = mProgressModelSize * 0.5F;
+                        float mainRadius = mSize * 0.5F;
 
                         // Get distance between 2 points
                         final float distance = (float) Math.sqrt(Math.pow(event.getX() - mainRadius, 2) +
@@ -761,10 +777,8 @@ public class ArcProgressStackView extends View {
                 }
                 break;
             case MotionEvent.ACTION_MOVE:
-                if (mActionMoveModelIndex == DISABLE_ANIMATE_INDEX && !mIsActionMoved)
-                    break;
-                if (mProgressAnimator.isRunning())
-                    break;
+                if (mActionMoveModelIndex == DISABLE_ANIMATE_INDEX && !mIsActionMoved) break;
+                if (mProgressAnimator.isRunning()) break;
                 handleActionMoveModel(event);
                 postInvalidate();
                 break;
@@ -799,8 +813,8 @@ public class ArcProgressStackView extends View {
         // Get progress offsets
         final float divider = mDrawWidthFraction == 0 ? mDrawWidthDimension : mSize * mDrawWidthFraction;
         mProgressModelSize = divider / mModels.size();
-        final float paintOffset = mProgressModelSize * 0.5f;
-        final float shadowOffset = mIsShadowed ? (mShadowRadius + mShadowDistance) : 0.0f;
+        final float paintOffset = mProgressModelSize * 0.5F;
+        final float shadowOffset = mIsShadowed ? (mShadowRadius + mShadowDistance) : 0.0F;
 
         // Set bound with offset for models
         for (int i = 0; i < mModels.size(); i++) {
@@ -831,7 +845,7 @@ public class ArcProgressStackView extends View {
 
         // Save and rotate to start angle
         canvas.save();
-        final float radius = mSize * 0.5f;
+        final float radius = mSize * 0.5F;
         canvas.rotate(mStartAngle, radius, radius);
 
         // Draw all of progress
@@ -852,7 +866,7 @@ public class ArcProgressStackView extends View {
 
             // Set model arc progress
             model.mPath.reset();
-            model.mPath.addArc(model.mBounds, 0.0f, progress);
+            model.mPath.addArc(model.mBounds, 0.0F, progress);
 
             // Draw gradient progress or solid
             resetShadowLayer();
@@ -860,10 +874,10 @@ public class ArcProgressStackView extends View {
             mProgressPaint.setStyle(Paint.Style.STROKE);
 
             if (mIsModelBgEnabled) {
+                //noinspection ResourceAsColor
                 mProgressPaint.setColor(isInEditMode() ? mPreviewModelBgColor : model.getBgColor());
-                canvas.drawArc(model.mBounds, 0.0f, mSweepAngle, false, mProgressPaint);
-                if (!isInEditMode())
-                    mProgressPaint.clearShadowLayer();
+                canvas.drawArc(model.mBounds, 0.0F, mSweepAngle, false, mProgressPaint);
+                if (!isInEditMode()) mProgressPaint.clearShadowLayer();
             }
 
             // Check if gradient for draw shadow at first and then gradient progress
@@ -871,8 +885,7 @@ public class ArcProgressStackView extends View {
                 if (!mIsModelBgEnabled) {
                     canvas.drawPath(model.mPath, mProgressPaint);
 
-                    if (!isInEditMode())
-                        mProgressPaint.clearShadowLayer();
+                    if (!isInEditMode()) mProgressPaint.clearShadowLayer();
                 }
 
                 mProgressPaint.setShader(model.mSweepGradient);
@@ -883,11 +896,10 @@ public class ArcProgressStackView extends View {
             canvas.drawPath(model.mPath, mProgressPaint);
 
             // Preview mode
-            if (isInEditMode())
-                continue;
+            if (isInEditMode()) continue;
 
             // Get model title bounds
-            mTextPaint.setTextSize(mProgressModelSize * 0.5f);
+            mTextPaint.setTextSize(mProgressModelSize * 0.5F);
             mTextPaint.getTextBounds(
                     model.getTitle(),
                     0, model.getTitle().length(),
@@ -895,9 +907,9 @@ public class ArcProgressStackView extends View {
             );
 
             // Draw title at start with offset
-            final float titleHorizontalOffset = model.mTextBounds.height() * 0.5f;
+            final float titleHorizontalOffset = model.mTextBounds.height() * 0.5F;
             final float progressLength =
-                    (float) (Math.PI / 180.0f) * progress * model.mBounds.width() * 0.5f;
+                    (float) (Math.PI / 180.0F) * progress * model.mBounds.width() * 0.5F;
             final String title = (String) TextUtils.ellipsize(
                     model.getTitle(), mTextPaint,
                     progressLength - titleHorizontalOffset * 2, TextUtils.TruncateAt.END
@@ -905,7 +917,7 @@ public class ArcProgressStackView extends View {
             canvas.drawTextOnPath(
                     title,
                     model.mPath,
-                    mIsRounded ? 0.0f : titleHorizontalOffset, titleHorizontalOffset,
+                    mIsRounded ? 0.0F : titleHorizontalOffset, titleHorizontalOffset,
                     mTextPaint
             );
 
@@ -921,18 +933,16 @@ public class ArcProgressStackView extends View {
             // Get progress text bounds
             mTextPaint.setTextSize(mProgressModelSize * 0.35f);
             mTextPaint.getTextBounds(
-                    percentProgress,
-                    0, percentProgress.length(),
-                    model.mTextBounds
+                    percentProgress, 0, percentProgress.length(), model.mTextBounds
             );
 
             // Get pos tan with end point offset and check whether the rounded corners for offset
             final float progressHorizontalOffset =
                     mIndicatorOrientation == IndicatorOrientation.VERTICAL ?
-                            model.mTextBounds.height() * 0.5f : model.mTextBounds.width() * 0.5f;
-            final float indicatorProgressOffset = (mIsRounded ? progressFraction : 1.0f) *
+                            model.mTextBounds.height() * 0.5F : model.mTextBounds.width() * 0.5F;
+            final float indicatorProgressOffset = (mIsRounded ? progressFraction : 1.0F) *
                     (-progressHorizontalOffset - titleHorizontalOffset
-                            - (mIsRounded ? model.mTextBounds.height() * 2.0f : 0.0f));
+                            - (mIsRounded ? model.mTextBounds.height() * 2.0F : 0.0F));
             model.mPathMeasure.getPosTan(
                     model.mPathMeasure.getLength() + indicatorProgressOffset, model.mPos,
                     mIndicatorOrientation == IndicatorOrientation.VERTICAL && !mIsRounded ?
@@ -941,28 +951,28 @@ public class ArcProgressStackView extends View {
             );
 
             // Check if there available place for indicator
-            if ((titleWidth + model.mTextBounds.height() + titleHorizontalOffset * 2.0f) -
+            if ((titleWidth + model.mTextBounds.height() + titleHorizontalOffset * 2.0F) -
                     indicatorProgressOffset < progressLength) {
                 // Get rotate indicator progress angle for progress value
                 float indicatorProgressAngle =
-                        (float) (Math.atan2(model.mTan[1], model.mTan[0]) * (180.0f / Math.PI));
+                        (float) (Math.atan2(model.mTan[1], model.mTan[0]) * (180.0F / Math.PI));
                 // Get arc angle of progress indicator
                 final float indicatorLengthProgressAngle = ((progressLength + indicatorProgressOffset) /
-                        (model.mBounds.width() * 0.5f)) * (float) (180.0f / Math.PI);
+                        (model.mBounds.width() * 0.5F)) * (float) (180.0F / Math.PI);
 
                 // Detect progress indicator position : left or right and then rotate
                 if (mIndicatorOrientation == IndicatorOrientation.VERTICAL) {
                     // Get X point of arc angle progress indicator
-                    final float x = (float) (model.mBounds.width() * 0.5f *
+                    final float x = (float) (model.mBounds.width() * 0.5F *
                             (Math.cos((indicatorLengthProgressAngle + mStartAngle) *
-                                    Math.PI / 180.0f))) + model.mBounds.centerX();
-                    indicatorProgressAngle += (x > radius) ? -90.0f : 90.0f;
+                                    Math.PI / 180.0F))) + model.mBounds.centerX();
+                    indicatorProgressAngle += (x > radius) ? -90.0F : 90.0F;
                 } else {
                     // Get Y point of arc angle progress indicator
-                    final float y = (float) (model.mBounds.height() * 0.5f *
+                    final float y = (float) (model.mBounds.height() * 0.5F *
                             (Math.sin((indicatorLengthProgressAngle + mStartAngle) *
-                                    Math.PI / 180.0f))) + model.mBounds.centerY();
-                    indicatorProgressAngle += (y > radius) ? 180.0f : 0.0f;
+                                    Math.PI / 180.0F))) + model.mBounds.centerY();
+                    indicatorProgressAngle += (y > radius) ? 180.0F : 0.0F;
                 }
 
                 // Draw progress value
@@ -979,24 +989,21 @@ public class ArcProgressStackView extends View {
 
             // Check if gradient and have rounded corners, because we must to create elevation effect
             // for start progress corner
-            if (isGradient && mIsRounded && progress != 0) {
-                model.mPathMeasure.getPosTan(0.0f, model.mPos, model.mTan);
+            if ((isGradient || mIsLeveled) && mIsRounded && progress != 0) {
+                model.mPathMeasure.getPosTan(0.0F, model.mPos, model.mTan);
 
                 // Set paint for overlay rounded gradient with shadow
-                setStartGradientRoundedShadowLayer();
-                mProgressPaint.setShader(null);
-                mProgressPaint.setStyle(Paint.Style.FILL_AND_STROKE);
-                mProgressPaint.setStrokeWidth(0.0f);
-                mProgressPaint.setColor(model.getColors()[0]);
+                setLevelShadowLayer();
+                //noinspection ResourceAsColor
+                mLevelPaint.setColor(isGradient ? model.getColors()[0] : model.getColor());
 
                 // Get bounds of start pump
-                final float halfSize = mProgressModelSize * 0.5f;
+                final float halfSize = mProgressModelSize * 0.5F;
                 final RectF arcRect = new RectF(
                         model.mPos[0] - halfSize, model.mPos[1] - halfSize,
-                        model.mPos[0] + halfSize, model.mPos[1] + halfSize
+                        model.mPos[0] + halfSize, model.mPos[1] + halfSize + 2.0F
                 );
-
-                canvas.drawArc(arcRect, 0.0f, -180.0f, true, mProgressPaint);
+                canvas.drawArc(arcRect, 0.0F, -180.0F, true, mLevelPaint);
             }
         }
 
@@ -1014,13 +1021,13 @@ public class ArcProgressStackView extends View {
         private int mBgColor;
         private int[] mColors;
 
-        private RectF mBounds = new RectF();
-        private Rect mTextBounds = new Rect();
+        private final RectF mBounds = new RectF();
+        private final Rect mTextBounds = new Rect();
 
-        private Path mPath = new Path();
+        private final Path mPath = new Path();
         private SweepGradient mSweepGradient;
 
-        private PathMeasure mPathMeasure = new PathMeasure();
+        private final PathMeasure mPathMeasure = new PathMeasure();
         private final float[] mPos = new float[2];
         private final float[] mTan = new float[2];
 
@@ -1089,10 +1096,8 @@ public class ArcProgressStackView extends View {
         }
 
         public void setColors(final int[] colors) {
-            if (colors != null && colors.length >= 2)
-                mColors = colors;
-            else
-                mColors = null;
+            if (colors != null && colors.length >= 2) mColors = colors;
+            else mColors = null;
         }
     }
 

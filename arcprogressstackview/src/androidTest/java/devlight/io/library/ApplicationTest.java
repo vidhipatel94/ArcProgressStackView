@@ -1,4 +1,4 @@
-package com.gigamole.library;
+package devlight.io.library;
 
 import android.app.Application;
 import android.test.ApplicationTestCase;

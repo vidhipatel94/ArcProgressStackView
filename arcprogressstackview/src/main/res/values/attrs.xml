@@ -19,6 +19,7 @@ limitations under the License.
         <attr name="apsv_shadowed" format="boolean"/>
         <attr name="apsv_rounded" format="boolean"/>
         <attr name="apsv_dragged" format="boolean"/>
+        <attr name="apsv_leveled" format="boolean"/>
 
         <attr name="apsv_typeface" format="string"/>
         <attr name="apsv_text_color" format="color"/>

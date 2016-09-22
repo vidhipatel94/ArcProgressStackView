@@ -21,15 +21,9 @@ Present your progress bars in arc mode with information and total control.
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 [![Codacy](https://drive.google.com/uc?export=download&id=0BxPO_UeS7wScSHhmckZyeGJDcXc)](https://www.codacy.com/app/gigamole53/ArcProgressStackView?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=DevLight-Mobile-Agency/ArcProgressStackView&amp;utm_campaign=Badge_Grade)
 
-<table align="center">
-    <tr>
-        <td><img src="https://drive.google.com/uc?export=download&id=0BxPO_UeS7wScTm9ZSlBMVlhmQ0k"/></td>
-        <td><img src="https://drive.google.com/uc?export=download&id=0BxPO_UeS7wScVXhJN0xQUThwVmc"/></td>
-        <td><img src="https://drive.google.com/uc?export=download&id=0BxPO_UeS7wScMjMydHVxOU5veWc"/></td>
-        <td><img src="https://drive.google.com/uc?export=download&id=0BxPO_UeS7wScM2NYdGQ5aEVsWTQ"/></td>
-        <td><img src="https://drive.google.com/uc?export=download&id=0BxPO_UeS7wScRTJMTF91V0NaYVE"/></td>
-    </tr>
-</table>
+<p align="center">
+    <img src="https://drive.google.com/uc?export=download&id=0BxPO_UeS7wScSURfZExTWTdvN2c"/>
+</p>
 
 You can check the sample app [here](https://github.com/DevLight-Mobile-Agency/ArcProgressStackView/tree/master/app).
 
@@ -172,14 +166,14 @@ Other methods check out in sample.
 And `XML` init:
 
 ```xml
-<com.gigamole.samples.ArcProgressStackView
-    android:id="@+id/apsv"
+<<devlight.io.library.ArcProgressStackView
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     app:apsv_rounded="true"
     app:apsv_shadowed="true"
     app:apsv_animated="true"
     app:apsv_dragged="true"
+    app:apsv_leveled="true"
     app:apsv_typeface="fonts/agency.ttf"
     app:apsv_text_color="#fff"
     app:apsv_shadow_distance="5dp"
