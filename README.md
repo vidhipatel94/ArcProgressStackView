@@ -15,7 +15,7 @@ Present your progress bars in arc mode with information and total control.
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 [![Android](https://drive.google.com/uc?export=download&id=0BxPO_UeS7wSccEZaclNGN0R5OWc)](https://github.com/DevLight-Mobile-Agency)
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-[![Download](https://drive.google.com/uc?export=download&id=0BxPO_UeS7wScaDl2U0QtWUx3emM)](https://bintray.com/gigamole/maven/arcprogressstackview/_latestVersion)
+[![Download](https://drive.google.com/uc?export=download&id=0BxPO_UeS7wScaDl2U0QtWUx3emM)](https://bintray.com/gigamole/maven/apsv/_latestVersion)
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 [![License](https://drive.google.com/uc?export=download&id=0BxPO_UeS7wScU0tmeFpGMHVWNWs)](https://github.com/DevLight-Mobile-Agency/ArcProgressStackView/blob/master/LICENSE.txt)
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
@@ -32,36 +32,29 @@ Download
 
 You can download a `.aar` from GitHub's [releases page](https://github.com/DevLight-Mobile-Agency/ArcProgressStackView/releases).
 
-Or use Gradle jCenter:
+Or use Gradle:
 
 ```groovy
-dependencies {
-    repositories {
-        mavenCentral()
-        maven {
-            url  'http://dl.bintray.com/gigamole/maven/'
-        }
-    }
-    compile 'com.github.gigamole.arcprogressstackview:library:+'
-}
+compile 'devlight.io:arcprogressstackview:1.0.4'
 ```
 
-Or Gradle Maven Central:
-
-```groovy
-compile 'com.github.gigamole.arcprogressstackview:library:1.0.3'
-```
-
-Or Maven:
-
+Or Maven:  
 ```xml
 <dependency>
-    <groupId>com.github.gigamole.arcprogressstackview</groupId>
-    <artifactId>library</artifactId>
-    <version>1.0.3</version>
-    <type>aar</type>
+  <groupId>devlight.io</groupId>
+  <artifactId>arcprogressstackview</artifactId>
+  <version>1.0.4</version>
+  <type>pom</type>
 </dependency>
 ```
+
+Or Ivy:  
+```groovy
+<dependency org='devlight.io' name='arcprogressstackview' rev='1.0.4'>
+  <artifact name='$AID' ext='pom'></artifact>
+</dependency>
+```
+
 
 Android SDK Version
 ===================
