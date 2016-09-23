@@ -54,7 +54,7 @@
                 android:shadowRadius="5"
                 android:text="STRATEGY"
                 android:textColor="#fff"
-                android:textSize="12sp"/>
+                android:textSize="11sp"/>
 
             <TextView
                 android:layout_width="wrap_content"
@@ -67,7 +67,7 @@
                 android:shadowRadius="5"
                 android:text="DESIGN"
                 android:textColor="#fff"
-                android:textSize="12sp"/>
+                android:textSize="11sp"/>
 
             <TextView
                 android:layout_width="wrap_content"
@@ -80,7 +80,7 @@
                 android:shadowRadius="5"
                 android:text="DEVELOPMENT"
                 android:textColor="#fff"
-                android:textSize="12sp"/>
+                android:textSize="11sp"/>
 
             <TextView
                 android:layout_width="wrap_content"
@@ -93,7 +93,7 @@
                 android:shadowRadius="5"
                 android:text="QA"
                 android:textColor="#fff"
-                android:textSize="12sp"/>
+                android:textSize="11sp"/>
 
         </LinearLayout>
 

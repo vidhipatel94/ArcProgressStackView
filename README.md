@@ -22,7 +22,7 @@ Present your progress bars in arc mode with information and total control.
 [![Codacy](https://drive.google.com/uc?export=download&id=0BxPO_UeS7wScSHhmckZyeGJDcXc)](https://www.codacy.com/app/gigamole53/ArcProgressStackView?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=DevLight-Mobile-Agency/ArcProgressStackView&amp;utm_campaign=Badge_Grade)
 
 <p align="center">
-    <img src="https://drive.google.com/uc?export=download&id=0BxPO_UeS7wScSURfZExTWTdvN2c"/>
+    <img src="https://drive.google.com/uc?export=download&id=0BxPO_UeS7wScTjlVNklhUHZibVE"/>
 </p>
 
 You can check the sample app [here](https://github.com/DevLight-Mobile-Agency/ArcProgressStackView/tree/master/app).
