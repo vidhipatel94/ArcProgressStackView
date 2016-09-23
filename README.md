@@ -11,7 +11,7 @@ ArcProgressStackView
 
 Present your progress bars in arc mode with information and total control.
 
-[![Android Arsenal](https://drive.google.com/uc?export=download&id=0BxPO_UeS7wScTm9HT0JzcmpHOVE)](http://android-arsenal.com/details/1/3308)
+[![Android Arsenal](https://drive.google.com/uc?export=download&id=0BxPO_UeS7wScVWk2RmJHNGJGWUk)](http://android-arsenal.com/details/1/3308)
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 [![Android](https://drive.google.com/uc?export=download&id=0BxPO_UeS7wSccEZaclNGN0R5OWc)](https://github.com/DevLight-Mobile-Agency)
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
