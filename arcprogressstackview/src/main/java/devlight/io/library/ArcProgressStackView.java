@@ -594,7 +594,6 @@ public class ArcProgressStackView extends View {
             tempTypeface = Typeface.createFromAsset(getContext().getAssets(), typeface);
         } catch (Exception e) {
             tempTypeface = Typeface.create(Typeface.DEFAULT, Typeface.NORMAL);
-            e.printStackTrace();
         }
 
         setTypeface(tempTypeface);
