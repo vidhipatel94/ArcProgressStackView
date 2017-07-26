@@ -17,18 +17,19 @@
 apply plugin: 'com.android.library'
 apply plugin: "com.jfrog.bintray"
 apply plugin: 'com.github.dcendents.android-maven'
+apply plugin: 'maven'
 
-version = "1.0.3"
+version = "1.0.4"
 
 android {
     compileSdkVersion 23
-    buildToolsVersion "23.0.2"
+    buildToolsVersion "23.0.3"
 
     defaultConfig {
         minSdkVersion 8
         targetSdkVersion 23
         versionCode 1
-        versionName "1.0.3"
+        versionName "1.0.4"
     }
     buildTypes {
         release {
@@ -41,12 +42,11 @@ android {
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
     compile 'com.android.support:appcompat-v7:23.1.0'
-    compile 'org.jsoup:jsoup:+'
 }
 
-def siteUrl = 'https://github.com/GIGAMOLE/ArcProgressStackView'
-def gitUrl = 'https://github.com/GIGAMOLE/ArcProgressStackView.git'
-group = "com.github.gigamole.arcprogressstackview"
+def siteUrl = 'https://github.com/DevLight-Mobile-Agency/ArcProgressStackView'
+def gitUrl = 'https://github.com/DevLight-Mobile-Agency/ArcProgressStackView.git'
+group = "devlight.io"
 
 install {
     repositories.mavenInstaller {
@@ -84,21 +84,30 @@ install {
     }
 }
 
-
 task sourcesJar(type: Jar) {
+    //noinspection GroovyAssignabilityCheck
     from android.sourceSets.main.java.srcDirs
     classifier = 'sources'
 }
 
 task javadoc(type: Javadoc) {
     source = android.sourceSets.main.java.srcDirs
+    //noinspection GroovyAssignabilityCheck
     classpath += project.files(android.getBootClasspath().join(File.pathSeparator))
+}
+
+afterEvaluate {
+    javadoc.classpath += files(android.libraryVariants.collect { variant ->
+        variant.javaCompile.classpath.files
+    })
 }
 
 task javadocJar(type: Jar, dependsOn: javadoc) {
     classifier = 'javadoc'
+    //noinspection GrUnresolvedAccess
     from javadoc.destinationDir
 }
+
 artifacts {
     archives javadocJar
     archives sourcesJar
@@ -115,7 +124,7 @@ bintray {
     pkg {
         repo = "maven"
         // it is the name that appears in bintray when logged
-        name = "arcprogressstackview"
+        name = "apsv"
         websiteUrl = siteUrl
         vcsUrl = gitUrl
         licenses = ["Apache-2.0"]
@@ -134,4 +143,3 @@ bintray {
         }
     }
 }
-apply plugin: 'maven'

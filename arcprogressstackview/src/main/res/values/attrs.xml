@@ -19,6 +19,7 @@ limitations under the License.
         <attr name="apsv_shadowed" format="boolean"/>
         <attr name="apsv_rounded" format="boolean"/>
         <attr name="apsv_dragged" format="boolean"/>
+        <attr name="apsv_leveled" format="boolean"/>
 
         <attr name="apsv_typeface" format="string"/>
         <attr name="apsv_text_color" format="color"/>
@@ -34,6 +35,7 @@ limitations under the License.
         <attr name="apsv_draw_width" format="fraction|dimension"/>
         <attr name="apsv_model_offset" format="dimension"/>
         <attr name="apsv_model_bg_enabled" format="boolean"/>
+        <attr name="apsv_show_progress" format="boolean"/>
 
         <attr name="apsv_start_angle" format="integer"/>
         <attr name="apsv_sweep_angle" format="integer"/>
