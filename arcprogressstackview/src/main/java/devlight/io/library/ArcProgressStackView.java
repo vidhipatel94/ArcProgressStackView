@@ -911,7 +911,7 @@ public class ArcProgressStackView extends View {
                     (float) (Math.PI / 180.0F) * progress * model.mBounds.width() * 0.5F;
             final String title = (String) TextUtils.ellipsize(
                     model.getTitle(), mTextPaint,
-                    progressLength - titleHorizontalOffset * 2, TextUtils.TruncateAt.END
+                    progressLength - titleHorizontalOffset * (mIsRounded ? 0 : 2), TextUtils.TruncateAt.END
             );
             canvas.drawTextOnPath(
                     title,
