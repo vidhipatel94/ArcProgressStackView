@@ -928,10 +928,11 @@ public class ArcProgressStackView extends View {
                     model.getTitle(), mTextPaint,
                     progressLength - titleHorizontalOffset * (mIsRounded ? 0 : 2), TextUtils.TruncateAt.END
             );
+            final float titleVerticleOffset = (progressLength * 0.5F) - mTextPaint.getTextSize();
             canvas.drawTextOnPath(
                     title,
                     model.mPath,
-                    mIsRounded ? 0.0F : titleHorizontalOffset, titleHorizontalOffset,
+                    mIsRounded ? 0.0F : titleVerticleOffset, titleHorizontalOffset,
                     mTextPaint
             );
 
