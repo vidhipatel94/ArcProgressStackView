@@ -913,7 +913,7 @@ public class ArcProgressStackView extends View {
             if (isInEditMode()) continue;
 
             // Get model title bounds
-            mTextPaint.setTextSize(mProgressModelSize * 0.5F);
+            mTextPaint.setTextSize(mProgressModelSize * 0.4F);
             mTextPaint.getTextBounds(
                     model.getTitle(),
                     0, model.getTitle().length(),
